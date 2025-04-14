@@ -94,8 +94,12 @@ class GraphingBase:
         marker_ = lambda i_: self.markers[i_ % self.n_markers]  # type: ignore
         self.color = color_  # type: ignore
         self.marker = marker_  # type: ignore
-        self.font_family = "Arial" if "Arial" in self.get_fonts() else ""
-        mpl.rc("font", size=self.font_size, family=self.font_family)
+        try:
+            self.font_family = "Arial" if "Arial" in self.get_fonts() else ""
+            mpl.rc("font", size=self.font_size, family=self.font_family)
+        except:
+            self.font_family = "" #"Arial" if "Arial" in self.get_fonts() else ""
+            mpl.rc("font", size=self.font_size, family=self.font_family)
 
     def get_fonts(self) -> List[str]:
         """Fetch the names of all the font families available on the system."""
